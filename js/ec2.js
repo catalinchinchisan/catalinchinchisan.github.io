@@ -1,4 +1,4 @@
-document.getElementById("id_business_version").innerHTML = "Business version 2018.10.12.0"
+document.getElementById("id_business_version").innerHTML = "Business version 2018.10.12.1"
 
 
 solve = function(){
@@ -20,6 +20,4 @@ solve = function(){
     }
     document.getElementById("id_x1").innerHTML = x1_re + " + " + x1_im + "i";
     document.getElementById("id_x2").innerHTML = x2_re + " + " + x2_im + "i";
-    
-   
 }
