@@ -18,6 +18,13 @@ function solve(){
         x1_re = (-b + Math.sqrt(delta)) / (2 * a);
         x1_im = 0;
     }
-    document.getElementById("id_x1").innerHTML = x1_re + " + " + x1_im + "i";
-    document.getElementById("id_x2").innerHTML = x2_re + " + " + x2_im + "i";
+    if(delta >= 0){
+        document.getElementById("id_x1").innerHTML = x1_re;
+        document.getElementById("id_x2").innerHTML = x2_re;
+    }else{
+        if(x1_im > 0) document.getElementById("id_x1").innerHTML = x1_re + " + " + x1_im + "i";
+        else document.getElementById("id_x1").innerHTML = x1_re + " " + x1_im + "i";
+        if(x2_im > 0) document.getElementById("id_x2").innerHTML = x2_re + " + " + x2_im + "i";
+        else document.getElementById("id_x2").innerHTML = x2_re + " " + x2_im + "i";
+    }
 }
