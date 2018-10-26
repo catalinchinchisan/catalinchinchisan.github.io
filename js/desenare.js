@@ -1,4 +1,4 @@
-document.getElementById("id_business_version").innerHTML = "Business version 2018.10.26.5"
+document.getElementById("id_business_version").innerHTML = "Business version 2018.10.26.6"
 document.getElementById("id_start").addEventListener("click", start);
 document.getElementById("id_stop").addEventListener("click", stop);
 
@@ -32,7 +32,7 @@ function start(){
     
     intervalId = setInterval(  deseneazaCerc, 10, context, canvas.width, canvas.height, alpha, 100);
 
-    var my_worker = new Worker("calcul_prime.js");
+    var my_worker = new Worker("js/calcul_prime.js");
     my_worker.onmessage = function(e){
         document.getElementById("id_prime").innerHTML = e.data;
     }
