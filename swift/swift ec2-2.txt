@@ -1,0 +1,74 @@
+import Foundation
+
+func citeste() ->(Float, Float, Float){
+    print("a=")
+    let s_opt = readLine()
+    if let s_a = s_opt{
+        let a_opt = Float(s_a)
+        if let a_local = a_opt{
+            print("b=")
+            let s_opt = readLine()
+            if let s_b = s_opt{
+                let b_opt = Float(s_b)
+                if let b_local = b_opt{
+                    print("c=")
+                    let s_opt = readLine()
+                    if let s_c = s_opt{
+                        let c_opt = Float(s_c)
+                        if let c_local = c_opt{
+                            return(a_local, b_local, c_local)
+                        }//if let c_local = c_opt
+                        else{
+                            return (1, 2, 1)
+                        }
+                    }// if let s_c = s_opt
+                    else{
+                        return (1, 2, 1)
+                    }
+                }//if let b_local = b_opt
+                else{
+                    return (1, 2, 1)
+                }
+            }//if let s_b = s_opt
+            else{
+                return (1, 2, 1)
+            }
+        }//if let a_local = a_opt
+        else{
+            return (1, 2, 1)
+        }
+    }//if let s_a = s_opt
+    else{
+        return (1, 2, 1)
+    }
+}
+
+func calculeaza(_ coef: (a: Float, b: Float, c: Float), x1: inout (re: Float, im: Float), x2: inout (re: Float, im: Float)){
+    let delta = coef.b * coef.b - 4 * coef.a * coef.c
+    if (delta >= 0){
+        x1.re = (-coef.b-sqrt(delta)) / (2 * coef.a)
+        x1.im = 0
+        x2.re = (-coef.b-sqrt(delta)) / (2 * coef.a)
+        x2.im = 0
+    }
+    else{
+        x1.re = (-coef.b) / (2 * coef.a)
+        x1.im = -sqrt(-delta) / (2 * coef.a)
+        x2.re = (-coef.b) / (2 * coef.a)
+        x2.im = -sqrt(-delta) / (2 * coef.a)
+    }
+}
+
+func afiseaza(x1: (re: Float, im: Float), x2: (re: Float, im: Float)){
+   print("x1= \(x1.re) + \(x1.im)")
+   print("x2= \(x2.re) + \(x2.im)")
+}
+
+
+var x1, x2: (re: Float, im:Float)
+x1 = (re: 0, im: 0)
+x2 = (re: 0, im: 0)
+
+var coef = citeste()
+calculeaza(coef, x1: &x1, x2: &x2)
+afiseaza(x1: x1, x2: x2)

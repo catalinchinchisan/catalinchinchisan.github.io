@@ -1,0 +1,77 @@
+import Foundation
+
+func citeste()->[Float]
+{
+print("a=")
+let s_opt = readLine()
+ if let s_a = s_opt{
+    let a_opt = Float(s_a)
+    if let a_local = a_opt{
+        print("b=")
+        let s_opt = readLine()
+        if let s_b = s_opt{
+            let b_opt = Float(s_b)
+            if let b_local = b_opt{
+                print("c=")
+                let s_opt = readLine()
+                if let s_c = s_opt{
+                    let c_opt = Float(s_c)
+                    if let c_local = c_opt{
+                    return [a_local, b_local, c_local]
+                    }//if let s_c = s_opt{
+                    else{
+                        return [1, 2, 1]
+                    }
+                }//if let s_c = s_opt{
+                else{
+                        return [1, 2, 1]
+                    }
+            }//if let b_local = b_opt{
+            else{
+                return [1, 2, 1]
+            }
+        }//  if let s_b = s_opt{
+        else{
+                return [1, 2, 1]
+            }
+    }// if let a_local = a_opt{
+    else{
+                return [1, 2, 1]
+            }
+  }//if let s_a = s_opt{
+  else{
+        return [1, 2, 1]
+    }
+}
+func calculeaza(_ coef: [Float], x1: inout [Float], x2: inout [Float])
+{
+  let delta = coef[1] * coef[1] - 4 * coef[0] * coef[2]
+    
+    if(delta >= 0){
+ 
+        x1.append((-coef[1] - sqrt(delta)) / (2 * coef[0]))
+        x1.append(Float(0.0))
+        x2.append((-coef[1] + sqrt(delta)) / (2 * coef[0]))
+        x2.append(Float(0.0))
+    }
+    else{
+     x1.append(-coef[1] / (2 * coef[0]))
+     x1.append(-sqrt(-delta) / (2 * coef[0]))
+     x2.append(-coef[1] / (2 * coef[0]))
+     x2.append(sqrt(-delta) / (2 * coef[0]))
+    }  
+}
+//--------------------------------------------------------------------------------
+func afiseaza( x1 : [Float], x2 : [Float])
+{
+    print("x1 = \(x1[0]) + \(x1[1])")
+    print("x2 = \(x2[0]) + \(x2[1])")
+    
+}
+//--------------------------------------------------------------------------------
+var x1 = [Float]()
+var x2 = [Float]()
+ 
+var coef = citeste()
+calculeaza(coef, x1: &x1, x2: &x2)
+afiseaza(x1 : x1, x2 : x2)
