@@ -1,0 +1,96 @@
+import Foundation
+
+func citeste()->[Float]
+{
+print("a=")
+let s_opt = readLine()
+ if let s_a = s_opt{
+    let a_opt = Float(s_a)
+    if let a_local = a_opt{
+        print("b=")
+        let s_opt = readLine()
+        if let s_b = s_opt{
+            let b_opt = Float(s_b)
+            if let b_local = b_opt{
+                print("c=")
+                let s_opt = readLine()
+                if let s_c = s_opt{
+                    let c_opt = Float(s_c)
+                    if let c_local = c_opt{
+                    return [a_local, b_local, c_local]
+                    }//if let s_c = s_opt{
+                    else{
+                        return [1, 2, 1]
+                    }
+                }//if let s_c = s_opt{
+                else{
+                        return [1, 2, 1]
+                    }
+            }//if let b_local = b_opt{
+            else{
+                return [1, 2, 1]
+            }
+        }//  if let s_b = s_opt{
+        else{
+                return [1, 2, 1]
+            }
+    }// if let a_local = a_opt{
+    else{
+                return [1, 2, 1]
+            }
+  }//if let s_a = s_opt{
+  else{
+        return [1, 2, 1]
+    }
+}
+func calculeaza(_ coef: [Float])->[[Float]]
+{
+  let delta = coef[1] * coef[1] - 4 * coef[0] * coef[2]
+    
+    if(delta >= 0){
+    return [[(-coef[1] - sqrt(delta)) / (2 * coef[0]), Float(0.0)], [(-coef[1] + sqrt(delta)) / (2 * coef[0]), Float(0.0)]]
+    }
+    else{
+    return [[-coef[1] / (2 * coef[0]),-sqrt(-delta) / (2 * coef[0]) ],[-coef[1] / (2 * coef[0]), sqrt(-delta) / (2 * coef[0])]]
+    }  
+}
+//--------------------------------------------------------------------------------
+func afiseaza(_ x :[[Float]])
+{
+    print("x1 = \(x[0][0]) + \(x[0][1])")
+    print("x2 = \(x[1][0]) + \(x[1][1])")
+    
+}
+//--------------------------------------------------------------------------------
+func tipareste_coeficienti(_ coef: [Float])
+{
+/*
+    for i in coef{
+        print(i)
+    }
+    */
+    /*
+    var i = 0
+    while i < 3{
+        print(coef[i])
+        i = i + 1
+    }
+    */
+    /*
+    var i = 0
+    repeat{
+        print(coef[i])
+        i = i + 1
+    }while i < 3
+    */
+}
+func rezolva(_ read: () -> [Float], _ compute: ([Float]) -> [[Float]], _ print_sol: ([[Float]]) -> Void)
+{
+    let coef = read()
+    //tipareste_coeficienti(coef)
+    let solutii = compute(coef)
+    print_sol(solutii)
+
+}
+//--------------------------------------------------------------------------------
+rezolva(citeste, calculeaza, afiseaza)

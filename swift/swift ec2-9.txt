@@ -1,0 +1,113 @@
+import Foundation
+
+func is_prime(_ x: Int) -> Bool{
+    var i = 2
+     while i * i == x{
+         if x % i == 0{
+             return false
+         }
+         i = i + 1
+     }
+     return true
+}
+
+class t_set_of_primes{
+    var primes: Set<Int>
+    
+    init(){
+        primes = []
+    }
+    init(_ x: Int){
+        if is_prime(x){
+            primes = [x]
+        }
+        else{
+            primes = []
+        }
+    }
+    init(_ x: Int, _ y: Int){
+    primes = []
+        for i in x...y{
+            if is_prime(i){
+                primes.insert(i)
+            }
+        }
+    }
+    deinit{
+        primes = []
+    }
+    func add(_ x: Int){
+    if is_prime(x){
+        primes.insert(x)
+    }
+       
+    }
+    
+    func print_set(){
+        var s = "The set is = {"
+        for i in primes.sorted(){
+            s = s + String(i) + " "
+        }
+       s = s + "}"
+       print(s)
+    }
+    func belongs(_ x: Int) -> Bool{
+        return primes.contains(x)
+    }
+    func set_union(_ x: t_set_of_primes){
+        primes = primes.union(x.primes)
+    }
+    func set_union2(_ x: t_set_of_primes) -> t_set_of_primes{
+        let tmp = t_set_of_primes()
+        primes = primes.union(x.primes)
+        return tmp
+    }
+    func subset(_ x: t_set_of_primes) -> Bool{
+        return primes.isSubset(of: x.primes)
+    }
+}
+
+let s_opt = readLine()
+
+if let s = s_opt{
+    switch s{
+        case "1": 
+            let a = t_set_of_primes(5)
+            a.print_set()
+            //fallthrough - executare cascata != break
+        case "2": // constructor cu doi parametri
+            let a = t_set_of_primes(5, 30)
+            a.print_set()
+        case "3": // add
+            let a = t_set_of_primes(5)
+            a.add(4)
+            a.add(7)
+            a.print_set()
+        case "4":
+            let a = t_set_of_primes(5, 30)
+            let x = 7
+            if a.belongs(x){
+                print("Belongs")
+            }else{
+                print("Does not belongs")
+            }
+        case "5": //union
+            let a = t_set_of_primes(5, 30)
+            let b = t_set_of_primes(41)
+            a.set_union(b)
+            a.print_set()
+        case "6": //union
+            let a = t_set_of_primes(5, 30)
+            let b = t_set_of_primes(7)
+            if b.subset(a){
+                print("is subset")
+            }else{
+                print("is not subset")
+            }
+        default:
+            print("Invalid input")
+    }
+}
+else{
+    print("Invalid input")
+}

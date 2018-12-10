@@ -1,0 +1,95 @@
+import Foundation
+
+struct t_coef{
+    var a: Float
+    var b: Float
+    var c: Float
+}
+
+struct t_solutie{
+    var re: Float
+    var im: Float
+}
+
+struct t_solutii{
+    var x1: t_solutie
+    var x2: t_solutie
+}
+func citeste()-> t_coef
+{
+var coef = t_coef(a: 1, b: 2, c: 3)
+print("a=")
+let s_opt = readLine()
+ if let s_a = s_opt{
+    let a_opt = Float(s_a)
+    if let a_local = a_opt{
+        print("b=")
+        let s_opt = readLine()
+        if let s_b = s_opt{
+            let b_opt = Float(s_b)
+            if let b_local = b_opt{
+                print("c=")
+                let s_opt = readLine()
+                if let s_c = s_opt{
+                    let c_opt = Float(s_c)
+                    if let c_local = c_opt{
+                    coef.a = a_local
+                    coef.b = b_local
+                    coef.c = c_local
+                    return coef
+                    }//if let s_c = s_opt{
+                    else{
+                        return coef
+                    }
+                }//if let s_c = s_opt{
+                else{
+                        return coef
+                    }
+            }//if let b_local = b_opt{
+            else{
+                return coef
+            }
+        }//  if let s_b = s_opt{
+        else{
+                return coef
+            }
+    }// if let a_local = a_opt{
+    else{
+                return coef
+            }
+  }//if let s_a = s_opt{
+  else{
+        return coef
+    }
+}
+//---------------------------------------------------------------
+func calculeaza(_ coef: t_coef)-> t_solutii
+{
+  let delta = coef.b * coef.b - 4 * coef.a * coef.c
+    
+    if(delta >= 0){
+        let x1 = t_solutie(re: (-coef.b - sqrt(delta)) / (2 * coef.a), im: Float(0.0))
+        let x2 = t_solutie(re: (-coef.a + sqrt(delta)) / (2 * coef.b), im: Float(0.0))
+        let sol = t_solutii(x1: x1, x2: x2)
+        return sol
+    }
+    else{
+        let x1 = t_solutie(re: -coef.b / (2 * coef.a), im: -sqrt(-delta) / (2 * coef.a))
+        let x2 = t_solutie(re: -coef.b / (2 * coef.a), im: sqrt(-delta) / (2 * coef.a))
+        let sol = t_solutii(x1: x1, x2: x2)
+        return sol
+    }  
+}
+//--------------------------------------------------------------------------------
+func afiseaza(_ x : t_solutii)
+{
+    print("x1 = \(x.x1.re) + \(x.x1.im)")
+    print("x2 = \(x.x2.re) + \(x.x2.im)")
+    
+}
+//--------------------------------------------------------------------------------
+
+    let coef = citeste()
+    let solutii = calculeaza(coef)
+    afiseaza(solutii)
+
