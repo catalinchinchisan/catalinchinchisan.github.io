@@ -1,5 +1,5 @@
 document.getElementById("id_logic_version").innerHTML = "Logic version=2019.01.11.0";
-document.getElementById("id_button").addEventListener("click", on_get_cam());
+document.getElementById("id_button").addEventListener("click", on_get_cam);
 
 function on_cam_error(){
     document.getElementById("id_video").srcObject = e;
