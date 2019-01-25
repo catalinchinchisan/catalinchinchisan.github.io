@@ -1,0 +1,73 @@
+<!doctype html>
+<html  ng-app="myApp">
+    <head>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+        <link rel="stylesheet" href="css/reset.css"/>
+        <link rel="stylesheet" href="css/bootstrap.css">
+        <link rel="stylesheet" href="css/style.css"/>
+    </head>
+    <body  ng-controller="indexController">
+       
+        <div class="container">
+            <div class="row">
+                <input type="text">
+                <button>Search</button>
+            </div>
+                <div class='container'>
+                    
+            <div class="row">
+                    <div class="col-md-6 col-sm-12"  style="background-color: red;">
+                        <div class='row'>
+                            <div class="col-md-12">
+                                <div><i class="fa fa-map-marker-alt"></i> City name</div>
+                            </div>
+                        </div>
+                            
+                        <div class="row">
+                            <ul>
+                                <li class='' style="display: inline;">
+                                    <div class="d-inline-block col-md-6">
+                                        <h1><i class="fa fa-thermometer-three-quarters"></i> 23 &#8451;</h1>
+                                    </div>
+                                </li>
+                                <li class='' style="display: inline;">
+                                        <div class="d-inline-block col-md-6">
+                                            <div><i class="fa fa-thermometer-three-quarters"></i> 23 &#8451;</div>
+                                        </div>
+                                    </li>
+                                <li style="display: inline;">
+                                    <div class="d-inline-block col-md-6">
+                                        <h1 class="display-1"><i class="fa fa-snowflake"></i></h1>
+                                        <!-- <h1 class="display-1"><i class="fas fa-cloud-rain"></i></h1>
+                                        <h1 class="display-1"><i class="far fa-sun"></i></h1>
+                                        <h1 class="display-1"><i class="fas fa-cloud"></i></h1>
+                                        -->
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                        <div class="col-md-6 col-sm-12" style="background-color: black;">
+                            <ul>
+                                <li class='p-1' style="display: inline;" ng-repeat='i in [1,2,3,4,5,6]'>
+                                    <div class='d-inline-block col-sm-4 col-md-4  border' style="background-color: blue;">
+                                        
+                                        <div><i class="fa fa-info-circle"></i> Day</div>
+                                        <h1><i class="fa fa-thermometer-three-quarters"></i> 23 &#8451;</h1>
+                                    </div>    
+                                </li>
+                            </ul>
+                        </div>
+                </div>
+                
+            </div>
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
+        <script src="js/controllers/indexController.js"></script>
+        <script src="js/jquery-3.3.1.min.js"></script>
+        <script src="js/jquery-ui.min.js"></script>
+    
+  </body>
+</html>

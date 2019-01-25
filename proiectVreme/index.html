@@ -1,0 +1,237 @@
+<html lang="en"  ng-app="myApp" >
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+        
+        
+       
+        <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.4.0/js/bootstrap4-toggle.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
+        <script src="js/controllers/indexController.js"></script>
+
+    </head>
+    <body class="bg" style="color: white;" ng-controller="indexController">
+            <div class="container">
+                <div class="navbar" style="background-color:#224f5ac7;">
+                    <button class="btn btn-dark" ng-model="tempScale"  ng-click="setTempScale()">{{tempScale}}</button>
+                       
+                    <div>
+                        <input ng-model="searchLocation" type="text">
+                        <i class="fa fa-search" ng-click="search()"></i>
+                        <i class="fa fa-microphone" ng-click="getSearchByVoice()"></i>
+                    </div>
+                    
+                   
+                </div>
+            
+            <div class="container mt-5" >
+                <div class='row'> 
+                    <div class="col-md-8 col-sm-12 weather mx-auto">
+                        <h1 class="text-center  display-4"><i class="fa fa-map-marker-alt"></i> {{apiCurrentResult.name}}, {{apiCurrentResult.sys.country}}</h1>
+                        <div class="row" style="font-size: 10px">
+                            <div class="col-6" >
+                                
+                                <h4 ng-if="tempScale=='C'"><i class="fas fa-temperature-low"></i></i> {{kToC(apiCurrentResult.main.temp_min)}} &#8451;</h4>
+                                <h4 ng-if="tempScale=='K'"><i class="fas fa-temperature-low"></i></i> {{apiCurrentResult.main.temp_min}} &#8490;</h4>
+                                <h4 ng-if="tempScale=='F'"><i class="fas fa-temperature-low"></i></i> {{kToF(apiCurrentResult.main.temp_min)}} &#8457;</h4>
+
+                                <h4 ng-if="tempScale=='C'"><i class="fas fa-temperature-high"></i> {{kToC(apiCurrentResult.main.temp_max)}} &#8451;</h4>
+                                <h4 ng-if="tempScale=='K'"><i class="fas fa-temperature-high"></i> {{apiCurrentResult.main.temp_max}} &#8490;</h4>
+                                <h4 ng-if="tempScale=='F'"><i class="fas fa-temperature-high"></i> {{kToF(apiCurrentResult.main.temp_max)}} &#8457;</h4>
+                              
+                                   <!-- <h1 class=""><i class="fa fa-snowflake"></i> Snow</h1>
+                                     <h1 class="display-1"><i class="fas fa-cloud-rain"></i></h1>
+                                    <h1 class="display-1"><i class="far fa-sun"></i></h1>
+                                    <h1 class="display-1"><i class="fas fa-cloud"></i></h1>
+                                    -->
+                            </div>
+                            <div class="col-6">
+                                <h1>
+                                    <div ng-if="tempScale=='C'">
+                                        <i class="fa fa-thermometer-three-quarters"></i>  {{kToC(apiCurrentResult.main.temp)}} &#8451;
+                                    </div>
+                                    <div ng-if="tempScale=='K'">
+                                        <i class="fa fa-thermometer-three-quarters"></i>   {{apiCurrentResult.main.temp}} &#8490;
+                                    </div>
+                                    <div ng-if="tempScale=='F'"> 
+                                        <i class="fa fa-thermometer-three-quarters"></i>   {{kToF(apiCurrentResult.main.temp)}} &#8457;
+                                    </div>
+                                
+                                </h1>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="row text-center border-top">
+                                <div class="col-4 ">
+                                    <span>Humiditi</span>
+                                </div>
+                                <div class="col-4">
+                                    <span>Wind speed</span>
+                                </div>
+                                <div class="col-4">
+                                    <span>Pressure</span>
+                                </div>
+                            </div>
+                            <div class="row text-center border-top">
+                                    <div class="col-4 ">
+                                        <span>{{apiCurrentResult.main.humidity}}%</span>
+                                    </div>
+                                    <div class="col-4">
+                                        <span>{{apiCurrentResult.wind.speed}} m/s</span>
+                                    </div>
+                                    <div class="col-4">
+                                        <span>{{apiCurrentResult.main.pressure}} hPa</span>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container " >
+                <div class='row'> 
+                    <div class="col-md-8 col-sm-12 mx-auto">
+                        <ul>
+                            <li style="display: inline;" ng-repeat='dayForecast in forecast'>
+                                <a data-toggle="modal" href="#moreInfoModal" style="color:white" ng-click="selectDay(dayForecast)">
+                                    <div class='d-inline-block col-sm-2 col-md-2  text-center mt-2' style="background-color: #224f5ac7;">
+                                        
+                                        <div>{{dayForecast.dayText.short}}</div>
+                                        <div class="mt-3">
+                                                <!--<i class="fa fa-snowflake"></i>
+                                                <h1 class="display-1"><i class="fas fa-cloud-rain"></i></h1>
+                                                <h1 class="display-1"><i class="far fa-sun"></i></h1>
+                                                <h1 class="display-1"><i class="fas fa-cloud"></i></h1>
+                                                -->
+                                        </div> 
+                                        <div class="mt-3" >
+                                            <div ng-if="tempScale=='C'">
+                                                {{kToC(dayForecast.tempK)}} &#8451;
+                                            </div>
+                                            <div ng-if="tempScale=='K'">
+                                                {{dayForecast.tempK}} &#8490;
+                                            </div>
+                                            <div ng-if="tempScale=='F'"> 
+                                                {{kToF(dayForecast.tempK)}} &#8457;
+                                            </div>
+                                        
+                                        </div>
+                                    </div> 
+                                </a>   
+                            </li>
+                                
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+             
+        
+        <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.4.0/css/bootstrap4-toggle.min.css" rel="stylesheet">  
+      
+
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+        <link rel="stylesheet" href="css/reset.css"/>
+        <link rel="stylesheet" href="css/bootstrap.css">
+        <link rel="stylesheet" href="css/style.css"/>
+    </body>
+    <footer class="page-footer font-small blue" style="background-color: #224f5ac7;">
+            <div class="footer-copyright text-center py-3">© 2019 Copyright: Catalin Chinchisan</div>
+        </footer>
+</html>
+
+
+
+
+
+
+    
+      <!-- The Modal -->
+      <div class="modal fade" id="moreInfoModal">
+        <div class="modal-dialog">
+          <div class="modal-content" style="color:black">
+          
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title"><i class="fa fa-calendar-day"></i>  {{selectedDay.dayText.long}}</h4>
+            
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            
+            <!-- Modal body -->
+            <div class="modal-body pre-scrollable">
+               
+                <ul>
+                    <li ng-repeat="dayInfo in selectedDay.list">
+                        <div class="col-12 text-center">{{dayInfo.timeText}}</div>
+                        <div class="row text-center border-top">
+                            <div class="col-4">
+                                <div ng-if="tempScale=='C'">
+                                    <i class="fa fa-thermometer-three-quarters"></i> {{kToC(dayInfo.main.temp)}} &#8451;
+                                </div>
+                                <div ng-if="tempScale=='K'">
+                                    <i class="fa fa-thermometer-three-quarters"></i> {{dayInfo.main.temp}} &#8490;
+                                </div>
+                                <div ng-if="tempScale=='F'"> 
+                                    <i class="fa fa-thermometer-three-quarters"></i> {{kToF(dayInfo.main.temp)}} &#8457;
+                                </div>
+                            </div>
+                            <div class="col-4 ">
+                                <div ng-if="tempScale=='C'">
+                                    <i class="fas fa-temperature-low"></i> {{kToC(dayInfo.main.temp_min)}} &#8451;
+                                </div>
+                                <div ng-if="tempScale=='K'">
+                                    <i class="fas fa-temperature-low"></i> {{dayInfo.main.temp_min}} &#8490;
+                                </div>
+                                <div ng-if="tempScale=='F'"> 
+                                    <i class="fas fa-temperature-low"></i> {{kToF(dayInfo.main.temp_min)}} &#8457;
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div ng-if="tempScale=='C'">
+                                    <i class="fas fa-temperature-high"></i> {{kToC(dayInfo.main.temp_max)}} &#8451;
+                                </div>
+                                <div ng-if="tempScale=='K'">
+                                    <i class="fas fa-temperature-high"></i> {{dayInfo.main.temp_max}} &#8490;
+                                </div>
+                                <div ng-if="tempScale=='F'"> 
+                                    <i class="fas fa-temperature-high"></i> {{kToF(dayInfo.main.temp_max)}} &#8457;
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row text-center border-top">
+                            <div class="col-4 ">
+                                <span>Humiditi {{dayInfo.main.humidity}}%</span>
+                            </div>
+                            <div class="col-4">
+                                <span>
+                                   
+                                    <span ng-if="dayInfo.snow">snow</span>
+                                    <span ng-if="dayInfo.rain">rain</span>
+                                    <span ng-if="dayInfo.sun">sun</span>
+                                    <span ng-if="dayInfo.extreme">extreme</span>
+                                    
+                                </span>
+                            </div>
+                            <div class="col-4">
+                                <span>Pressure {{dayInfo.main.pressure}} hPa</span>
+                            </div>
+                        </div>
+                        
+                    </li>
+                </ul> 
+            </div>
+            
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+            
+          </div>
+        </div>
+      </div>
